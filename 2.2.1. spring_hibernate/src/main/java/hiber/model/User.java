@@ -1,5 +1,7 @@
 package hiber.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +10,7 @@ public class User {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "id") //??????????????????????
    private Long id;
 
    @Column(name = "name")
@@ -18,6 +21,7 @@ public class User {
 
    @Column(name = "email")
    private String email;
+
 
    public User() {}
    
@@ -58,4 +62,10 @@ public class User {
    public void setEmail(String email) {
       this.email = email;
    }
+
+
+   @OneToOne(cascade = CascadeType.ALL)  //тип отношений между табл, каскад - измен в одной таблице, затрагивают измен в связанной табл
+   @JoinColumn(name = "car_id") // Foreign Key? ссылается на стобец айди в табл cars
+   private Car carId;
+
 }
