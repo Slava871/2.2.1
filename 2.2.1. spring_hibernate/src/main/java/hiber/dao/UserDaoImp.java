@@ -6,7 +6,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository  //нужно для объявления дао бином
@@ -24,10 +26,14 @@ public class UserDaoImp implements UserDao {
    public void add(Car car) {sessionFactory.getCurrentSession().save(car);}
 
    @Override
-   public void add(Long carId) {
-      sessionFactory.getCurrentSession().cre
+   public User getUserWithCar() {
+      TypedQuery query = sessionFactory.getCurrentSession()
+              .createQuery("from User as u inner join fetch u.userCar as uscr where uscr.model = :param and uscr.series = :param2");
+      query.setParameter("param", "zapor");
+      query.setParameter("param2", 333);
+      User user = (User) query.getSingleResult();
+      return  user;
    }
-
 
    @Override
    @SuppressWarnings("unchecked")
@@ -36,14 +42,11 @@ public class UserDaoImp implements UserDao {
       return query.getResultList();
    }
 
-//
-//   @Override
-//   @SuppressWarnings("unchecked")
-//   public List<Car> listCars() {
-//      TypedQuery<Car> query=sessionFactory.getCurrentSession().createQuery("from Car");
-//      return query.getResultList();
-//   }
-//
+   @Override
+   public List<Car> listCars() {
+      TypedQuery<Car> query=sessionFactory.getCurrentSession().createQuery("from Car");
+      return query.getResultList();
+   }
 
 
 }

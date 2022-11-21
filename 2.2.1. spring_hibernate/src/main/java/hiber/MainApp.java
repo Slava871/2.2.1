@@ -27,17 +27,27 @@ public class MainApp {
       userService.add(new Car("Lada", 5));
       userService.add(new Car("Lambo", 223));
 
+       List<User> users = userService.listUsers();
+       List<Car> cars = userService.listCars();
 
 
-      List<User> users = userService.listUsers();
-      for (User user : users) {
-         System.out.println("Id = "+user.getId());
-         System.out.println("First Name = "+user.getFirstName());
-         System.out.println("Last Name = "+user.getLastName());
-         System.out.println("Email = "+user.getEmail());
-         System.out.println();
-      }
 
-      context.close();
+       for(int j=0; j<users.size(); j++){
+           users.get(j).setCar(cars.get(j));
+           userService.add(users.get(j));
+       }
+
+       User usr =   userService.getUserWithCar();
+       System.out.println(usr.getFirstName()+ "   @@@@@@@@@@@@@@@@@@@@@");
+
+
+//       for (User user : users) {
+//           System.out.println("Id = "+user.getId());
+//           System.out.println("First Name = "+user.getFirstName());
+//           System.out.println("Last Name = "+user.getLastName());
+//           System.out.println("Email = "+user.getEmail());
+//           System.out.println();
+//       }
+       context.close();
    }
 }

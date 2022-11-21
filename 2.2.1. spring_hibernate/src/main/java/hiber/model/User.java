@@ -23,6 +23,8 @@ public class User {
    private String email;
 
 
+
+
    public User() {}
    
    public User(String firstName, String lastName, String email) {
@@ -64,8 +66,13 @@ public class User {
    }
 
 
-   @OneToOne(cascade = CascadeType.ALL)  //тип отношений между табл, каскад - измен в одной таблице, затрагивают измен в связанной табл
+   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)  //тип отношений между табл, каскад - измен в одной таблице, затрагивают измен в связанной табл
    @JoinColumn(name = "car_id") // Foreign Key? ссылается на стобец айди в табл cars
-   private Car carId;
+   private Car userCar;
+
+   @Autowired
+    public void setCar(Car userCar) {
+        this.userCar = userCar;
+    }
 
 }

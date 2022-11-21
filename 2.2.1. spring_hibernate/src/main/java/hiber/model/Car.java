@@ -22,8 +22,7 @@ public class Car {
     @Column(name = "series")
     private int series;
 
-//    @Column(name = "user_id")
-//    private int userId;
+
 
     public Car(String model, int series){
         this.model = model;
@@ -58,10 +57,7 @@ public class Car {
 
 
 
-//    @Autowired
-//    public void setUser(User userCar) {
-//        this.userCar = userCar;
-//    }
+
 
 
 }
