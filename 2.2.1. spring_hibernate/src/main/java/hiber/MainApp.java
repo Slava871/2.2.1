@@ -30,16 +30,12 @@ public class MainApp {
        List<User> users = userService.listUsers();
        List<Car> cars = userService.listCars();
 
-
-
        for(int j=0; j<users.size(); j++){
            users.get(j).setCar(cars.get(j));
-           userService.add(users.get(j));
+           userService.update(users.get(j));
        }
 
        User usr =   userService.getUserWithCar();
-       System.out.println(usr.getFirstName()+ "   @@@@@@@@@@@@@@@@@@@@@");
-
 
 //       for (User user : users) {
 //           System.out.println("Id = "+user.getId());

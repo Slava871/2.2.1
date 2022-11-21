@@ -23,14 +23,19 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
+   public void update(User user) {
+      sessionFactory.getCurrentSession().update(user);
+   }
+
+   @Override
    public void add(Car car) {sessionFactory.getCurrentSession().save(car);}
 
    @Override
    public User getUserWithCar() {
       TypedQuery query = sessionFactory.getCurrentSession()
               .createQuery("from User as u inner join fetch u.userCar as uscr where uscr.model = :param and uscr.series = :param2");
-      query.setParameter("param", "zapor");
-      query.setParameter("param2", 333);
+      query.setParameter("param", "Lambo");
+      query.setParameter("param2", 223);
       User user = (User) query.getSingleResult();
       return  user;
    }
